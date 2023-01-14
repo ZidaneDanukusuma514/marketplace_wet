@@ -1,4 +1,11 @@
-import { addDoc, doc, onSnapshot, updateDoc } from "firebase/firestore";
+import {
+  addDoc,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  query,
+  updateDoc,
+} from "firebase/firestore";
 import React, { createContext, useState } from "react";
 import { CollectionDb, db } from "../firebase/firebase";
 export const ContextDatabase = createContext(null);
@@ -17,19 +24,17 @@ export default function DatabaseProvider({ children }) {
     return () => unsubscribe();
   };
 
-  const handleAddDocs = async ({
-    title,
-    description,
-    price,
-    amount,
-    img_url,
-  }) => {
+  const handleDelete = async (id) => {
+    await deleteDoc(doc(db, "items", id));
+  };
+
+  const handleAddDocs = async ({ title, description, price, amount, img }) => {
     await addDoc(CollectionDb, {
       title: title,
       description: description,
       price: price,
       amount: amount,
-      img: img_url,
+      img: img,
     }).then((doc) => {
       console.log("add data: ", doc);
     });
@@ -51,7 +56,15 @@ export default function DatabaseProvider({ children }) {
     });
   };
   return (
-    <ContextDatabase.Provider value={{ data }}>
+    <ContextDatabase.Provider
+      value={{
+        data,
+        handleGetDocs,
+        handleUpdateDocs,
+        handleAddDocs,
+        handleDelete,
+      }}
+    >
       {children}
     </ContextDatabase.Provider>
   );

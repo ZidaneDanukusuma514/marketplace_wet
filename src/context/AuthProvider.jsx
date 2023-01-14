@@ -9,12 +9,18 @@ export const contextUser = createContext(null);
 
 function AuthProvider({ children }) {
   const [user, setUser] = useState("");
+  const [admin, setAdmin] = useState(false);
 
   const handleSignin = async ({ email, password }) => {
     await signInWithEmailAndPassword(auth, email, password)
       .then((currentUser) => {
         const user = currentUser.user;
         setUser(user);
+        if (user.email === "zidaneketz@gmail.com") {
+          setAdmin(true);
+        } else {
+          setAdmin(false);
+        }
         console.log("Login Success:", user);
       })
       .catch((error) => {
@@ -40,11 +46,12 @@ function AuthProvider({ children }) {
     await signOut(auth);
     console.log("Logout Clicked");
     setUser(null);
+    setAdmin(false);
   };
 
   return (
     <contextUser.Provider
-      value={{ user, handleSignin, handleRegister, handleLogout }}
+      value={{ user, admin, handleSignin, handleRegister, handleLogout }}
     >
       {children}
     </contextUser.Provider>
