@@ -6,7 +6,7 @@ function CartProvider({ children }) {
   const [CartItem, setCartItem] = useState([]);
 
   const handleSelectItem = (data) => {
-    setCartItem(...data);
+    setCartItem(data.data.title);
   };
   return (
     <ContextCart.Provider value={{ CartItem, handleSelectItem }}>

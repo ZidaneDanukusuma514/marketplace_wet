@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import { ImCancelCircle } from "react-icons/im";
 import { contextUser } from "../context/AuthProvider";
 import { ContextCart } from "../context/CartProvider";
 import { ContextDatabase } from "../context/DatabaseProvider";
@@ -19,7 +18,7 @@ function ProductItem({ data }) {
           }}
           className="absolute text-white top-0 right-0 p-2 bg-rose-500 hover:bg-rose-600"
         >
-          <ImCancelCircle />
+          Del
         </button>
       ) : null}
       <img
@@ -37,7 +36,7 @@ function ProductItem({ data }) {
           onClick={(e) => {
             e.preventDefault();
             setValue(+1);
-            handleSelectItem(data);
+            handleSelectItem({ data: data });
           }}
           className="rounded-lg font-semibold text-white bg-green-500 hover:bg-green-600 "
         >
