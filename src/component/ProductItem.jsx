@@ -1,11 +1,14 @@
 import React, { useContext, useState } from "react";
 import { ImCancelCircle } from "react-icons/im";
 import { contextUser } from "../context/AuthProvider";
+import { ContextCart } from "../context/CartProvider";
 import { ContextDatabase } from "../context/DatabaseProvider";
 function ProductItem({ data }) {
   const [value, setValue] = useState(0);
   const { admin } = useContext(contextUser);
   const { handleDelete } = useContext(ContextDatabase);
+  const { handleSelectItem } = useContext(ContextCart);
+
   return (
     <div className="flex flex-col relative overflow-hidden rounded-md w-[200px] h-[240px] p-4 border-2 border-black/75">
       {admin ? (
@@ -21,7 +24,7 @@ function ProductItem({ data }) {
       ) : null}
       <img
         src={data.img}
-        className="max-h-[150px] rounded-md grow"
+        className="max-h-[150px] bg-cover rounded-md grow"
         alt="image"
       />
       <div className="font-bold">
@@ -34,6 +37,7 @@ function ProductItem({ data }) {
           onClick={(e) => {
             e.preventDefault();
             setValue(+1);
+            handleSelectItem(data);
           }}
           className="rounded-lg font-semibold text-white bg-green-500 hover:bg-green-600 "
         >

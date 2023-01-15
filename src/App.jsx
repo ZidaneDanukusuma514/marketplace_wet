@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import NotFound from "./component/NotFound";
 import Singin from "./pages/Signin";
 import Register from "./pages/Register";
+import Cart from "./pages/Cart";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/signin" element={<Singin />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/Cart" element={<Cart />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
