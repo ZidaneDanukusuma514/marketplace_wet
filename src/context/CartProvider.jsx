@@ -5,8 +5,8 @@ export const ContextCart = createContext(null);
 function CartProvider({ children }) {
   const [CartItem, setCartItem] = useState([]);
 
-  const handleSelectItem = (data) => {
-    setCartItem(data.data.title);
+  const handleSelectItem = (prop) => {
+    setCartItem([prop, ...CartItem]);
   };
   return (
     <ContextCart.Provider value={{ CartItem, handleSelectItem }}>

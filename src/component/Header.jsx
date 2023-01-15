@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import { AiOutlineShoppingCart } from "react-icons/Ai";
 import { contextUser } from "../context/AuthProvider";
 import AccountDisplay from "./AccountDisplay";
 
@@ -38,7 +37,7 @@ function Header() {
                 isActive ? "text-green-500 font-bold" : "text-black/75"
               }
             >
-              <AiOutlineShoppingCart className="text-lg" />
+              Cart
             </NavLink>
           </li>
           {!user ? (
